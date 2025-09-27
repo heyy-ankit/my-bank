@@ -1,6 +1,7 @@
 package com.mybank.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Customer {
 
@@ -9,6 +10,7 @@ public class Customer {
     private String name;
     private String email;
     private LocalDateTime dateCreated;
+    private List<Accounts> accounts;
 
     //constructor
     public Customer(String id){
@@ -48,9 +50,14 @@ public class Customer {
 
     //Methods
 
-
     @Override
     public String toString() {
-        return "name = "+ name + " , "+ "id" +" , "+ id + " , "+ "email" + email;
+        return "Customer{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", accounts=" + accounts +
+                '}';
     }
 }
