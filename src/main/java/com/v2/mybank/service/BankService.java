@@ -1,5 +1,6 @@
 package com.v2.mybank.service;
 
+import com.v2.mybank.enums.AccountType;
 import com.v2.mybank.model.Account;
 import com.v2.mybank.model.Customer;
 
@@ -29,11 +30,37 @@ public class BankService {
     return customer;
   }
 
+  public Account openAccount(String customerId, AccountType accountType) {
+    // Add accountType validation
+    String accountNumber = "A-"+generateRandomId();
+
+    Customer customer = customersById.get(customerId);
+    // Add customer exists validation != null
+
+    Account account = new Account(accountNumber);
+    account.setCustomerId(customerId);
+    account.setType(accountType);
+
+    customer.addAccount(account);
+    accountsByNumber.put(accountNumber, account);
+    return account;
+  }
+
   public String listCustomers() {
     StringBuilder sb = new StringBuilder("[\n");
     int i = 1;
     for (Customer customer : customersById.values()) {
       sb.append("  ").append(i++).append(". ").append(customer).append("\n");
+    }
+    sb.append("]");
+    return sb.toString();
+  }
+
+  public String listCustomerAccounts() {
+    StringBuilder sb = new StringBuilder("[\n");
+    int i = 1;
+    for (Account account : accountsByNumber.values()) {
+      sb.append("  ").append(i++).append(". ").append(account).append("\n");
     }
     sb.append("]");
     return sb.toString();

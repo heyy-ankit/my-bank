@@ -1,5 +1,7 @@
 package com.v2.mybank;
 
+import com.v2.mybank.enums.AccountType;
+import com.v2.mybank.model.Account;
 import com.v2.mybank.model.Customer;
 import com.v2.mybank.service.BankService;
 
@@ -46,10 +48,11 @@ public class Main {
       return false;
     }
     if (choice < 0 || choice > 9) {
-      System.out.println("Please choose option in between 0 to 9");
+      System.out.println("Please choose an option in between 0 to 9");
       return false;
     }
     if (choice == 0) {
+      System.out.println("GoodBye! 👋");
       return true;
     }
     if (choice == 1) {
@@ -59,6 +62,17 @@ public class Main {
       String email = scanner.next();
       Customer customer = bankService.createCustomer(name, email);
       System.out.println("Customer created with ID: " + customer.getId());
+    }
+    if (choice == 2) {
+      System.out.print("Enter customer ID: ");
+      String customerId = scanner.next();
+      System.out.print("Select account type (CHECKING, SAVINGS): ");
+      String accountType = scanner.next();
+      Account account = bankService.openAccount(customerId, AccountType.valueOf(accountType));
+      System.out.println("Account created with ID: " + account.getAccountNumber());
+    }
+    if (choice == 3) {
+      System.out.println(bankService.listCustomerAccounts());
     }
     if (choice == 9) {
       System.out.println(bankService.listCustomers());

@@ -24,7 +24,7 @@ public class Customer {
     if (account == null) {
       throw new IllegalArgumentException("Account cannot be null");
     }
-    if (account.getOwner() != this) {
+    if (!account.getCustomerId().equals(this.id)) {
       throw new IllegalStateException("This account does not belong to current customer");
     }
     this.accounts.add(account);

@@ -13,11 +13,13 @@ public class Account {
   private AccountType type;
   private double balance;
   private AccountStatus status;
-  private Customer owner;
+  private String customerId;
   private final List<Transaction> transactions;
 
   public Account(String accountNumber) {
     this.accountNumber = accountNumber;
+    this.status = AccountStatus.ACTIVE;
+    this.balance = 0.0d;
     this.transactions = new ArrayList<>();
   }
 
@@ -80,12 +82,12 @@ public class Account {
     this.status = status;
   }
 
-  public Customer getOwner() {
-    return owner;
+  public String getCustomerId() {
+    return customerId;
   }
 
-  public void setOwner(Customer owner) {
-    this.owner = owner;
+  public void setCustomerId(String customerId) {
+    this.customerId = customerId;
   }
 
   public List<Transaction> getTransactions() {
@@ -99,7 +101,7 @@ public class Account {
         ", type=" + type +
         ", balance=" + balance +
         ", status=" + status +
-        ", owner=" + owner +
+        ", customerId='" + customerId + '\'' +
         ", transactions=" + transactions +
         '}';
   }
